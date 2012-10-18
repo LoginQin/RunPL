@@ -47,11 +47,12 @@
 
 ###描述参数的函数, 格式: $n = 函数名() :
     SelectFolder(), SaveFile() , SelectFile(), TextBox(), ComboBox()
-    *第一个参数都是Label标记,  并且都需要返回对应的  $1 = 函数名()*
+
+   *第一个参数都是Label标记,  并且都需要返回对应的  $1 = 函数名()*
 
 ###引用变量
-  &AppPath  RunPL程序当前的执行路径
-  &AppLib   RunPL程序当前路径下lib目录
+    &AppPath  RunPL程序当前的执行路径  
+    &AppLib   RunPL程序当前路径下lib目录  
 
 ##关 于 作  者
 覃 炜  
