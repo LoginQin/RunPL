@@ -7,7 +7,7 @@ using System.Text.RegularExpressions;
 namespace RunPL
 {
     enum KEY {
-        Descript, Manual, ShowCMD, SelectFolder, SaveFile, RunPL, ComboBox, TextBox, SelectFile, CheckBox, Error
+        Descript, Manual, Command, ShowCMD, SelectFolder, SaveFile, RunPL, ComboBox, TextBox, SelectFile, CheckBox, Error
     }
     class Parser
     {

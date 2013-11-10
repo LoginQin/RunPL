@@ -27,6 +27,8 @@ namespace RunPL
         private int argv_nums = 0;
         private string appPath = null;
         private bool can_run = true;
+        private String processName = "perl.exe";
+        private String defaultPreParam = ""; //程序开始前预定义的参数, 如java的 -cp 内容等等.或-a
         private Hashtable ht_assign = new Hashtable();
 
 
@@ -60,8 +62,8 @@ namespace RunPL
 
             //例Process
             Process p = new Process();
-            p.StartInfo.FileName = "perl.exe";           //确定程序名
-            p.StartInfo.Arguments = " " + command;    //确定程式命令行
+            p.StartInfo.FileName = this.processName;           //确定程序名
+            p.StartInfo.Arguments = this.defaultPreParam + " " + command;    //确定程式命令行
             p.StartInfo.UseShellExecute = false;        //Shell的使用
             p.StartInfo.RedirectStandardInput = !this.show_cmd;   //重定向输入
 
@@ -335,10 +337,10 @@ namespace RunPL
                 this.btn_run_pl.Enabled = true;
             }
         }
-        //打开Perl描述文件
+        //打开脚本运行描述文件
         private void button2_Click(object sender, EventArgs e)
         {
-            openFileDialog1.Filter = "Perl描述文件|*.rpl";
+            openFileDialog1.Filter = "运行脚本描述文件|*.rpl";
             if (openFileDialog1.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
                 string file_path = openFileDialog1.FileName;
                 this.open_RunPL_file(file_path);
@@ -506,7 +508,7 @@ namespace RunPL
           
             switch (ex.func_type) { 
                 case KEY.Error:
-                    ParmError("错误!!Perl描述文件存在无效函数:" + ex.func_name + "\r\n");
+                    ParmError("错误!!描述文件存在无效函数:" + ex.func_name + "\r\n");
                     break;
                 case KEY.RunPL:
                     if(checkParmsNum(parms.Count, 1)){
@@ -631,10 +633,27 @@ namespace RunPL
                         ParmError("ShowCMD 参数错误, 应为ShowCMD(1)或ShowCMD(0)");
                     }
                     break;
+                case KEY.Command://扩展RunPL能够运行别的脚本名称,比如java, node, ruby等,不再局限于perl, 可以由用户自定义程序
+                    if (parms.Count >  0 ) {
+                        String _param = "";
+                        if(parms.Count > 1 ){
+                            _param = parms[1].ToString();
+                        }
+                        setCommand(parms[0].ToString(), _param);
+                    } else {
+                        ParmError("Process 参数错误");
+                    }
+                    break;
                 default:
                     return;
 
             }
+        }
+
+        //设置执行的程序及默认参数配置.
+        private void setCommand(String processName, String default_param){
+            this.processName = processName;
+            this.defaultPreParam = default_param;
         }
 
         private void Form1_DragEnter(object sender, DragEventArgs e)
