@@ -118,7 +118,7 @@ java -cp xxx.jar -jar app.jar isdefault
     &AppLib   RunPL程序当前路径下lib目录  
 ###下载
 
-[RunPL - 0.1.0](https://raw.github.com/LoginQin/RunPL/master/assert/RunPL.zip)
+[RunPL - 0.0.1](https://raw.github.com/LoginQin/RunPL/master/assert/RunPL.zip)
 
 ##关 于 作  者
 覃 炜  
